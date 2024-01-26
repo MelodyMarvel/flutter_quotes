@@ -1,4 +1,46 @@
+// import 'package:flutter/material.dart';
+// import 'quote.dart';
+
+// void main()=> runApp(MaterialApp(
+//   home: QuoteList(),
+// )
+// );
+
+// class QuoteList extends StatefulWidget {
+
+//   List<Quote> quotes = [
+//     Quote(author: 'Oscar Wild', text: 'Be yourself; everyone else is already taken'),
+//     Quote(author: 'Oscar Wild', text: 'I have nothing to declare except my genius'),
+//     Quote(author: 'Oscar Wild', text: 'The truth is rarely pure and never simple'),
+
+//   ];
+
+//   @override
+//   _QuoteListState createState() => _QuoteListState();
+// }
+
+// class _QuoteListState extends State<QuoteList> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: Colors.grey[200],
+//       appBar: AppBar(
+//         title: Text('Awesome Quotes'),
+//         centerTitle: true,
+//         backgroundColor: Colors.redAccent,
+//       ),
+//       body: Column(
+//         children: widget.quotes.map((quote) =>Text('${quote.text} - ${quote.author}')).toList(),
+//         ),
+//     );
+//   }
+// }
+ 
+
+
+ //CARD FORMAT  
 import 'package:flutter/material.dart';
+import 'quote.dart';
 
 void main()=> runApp(MaterialApp(
   home: QuoteList(),
@@ -7,11 +49,48 @@ void main()=> runApp(MaterialApp(
 
 class QuoteList extends StatefulWidget {
 
-  List<String> quotes = [
-    'Be yourself; everyone else is already taken',
-    'I have nothing to declare except my genius',
-    'The truth is rarely pure and never simple'
+  List<Quote> quotes = [
+    Quote(author: 'Oscar Wild', text: 'Be yourself; everyone else is already taken'),
+    Quote(author: 'Oscar Wild', text: 'I have nothing to declare except my genius'),
+    Quote(author: 'Oscar Wild', text: 'The truth is rarely pure and never simple'),
   ];
+
+Widget quoteTemplate(quote){
+  return Card(
+    margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+    child: Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Text(
+            quote.text,
+            style: TextStyle(
+              fontSize: 18.0,
+              color: Colors.grey[600],
+            ),
+            ),
+            SizedBox(height: 6.0,),
+      
+            Text(
+            quote.author,
+            style: TextStyle(
+              fontSize: 14.0,
+              color: Colors.grey[800],
+            ),
+            ),
+
+            SizedBox(height: 8.0),
+            ElevatedButton.icon(
+              onPressed:(){},
+              label: Text('delete quote'),
+              icon: Icon(Icons.delete),
+            )
+        ]
+        ),
+    ),
+  );
+}
 
   @override
   _QuoteListState createState() => _QuoteListState();
@@ -28,7 +107,7 @@ class _QuoteListState extends State<QuoteList> {
         backgroundColor: Colors.redAccent,
       ),
       body: Column(
-        children: widget.quotes.map((quote) =>Text(quote)).toList(),
+        children: widget.quotes.map((quote) => widget.quoteTemplate(quote)).toList(),
         ),
     );
   }
