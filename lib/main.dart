@@ -48,6 +48,11 @@ void main()=> runApp(MaterialApp(
 );
 
 class QuoteList extends StatefulWidget {
+  @override
+  _QuoteListState createState() => _QuoteListState();
+}
+
+class _QuoteListState extends State<QuoteList> {
 
   List<Quote> quotes = [
     Quote(author: 'Oscar Wild', text: 'Be yourself; everyone else is already taken'),
@@ -55,13 +60,22 @@ class QuoteList extends StatefulWidget {
     Quote(author: 'Oscar Wild', text: 'The truth is rarely pure and never simple'),
   ];
 
-Widget quoteTemplate(quote){
-  return QuoteCard(quote:quote);
-}
-
   @override
-  _QuoteListState createState() => _QuoteListState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.grey[200],
+      appBar: AppBar(
+        title: Text('Awesome Quotes'),
+        centerTitle: true,
+        backgroundColor: Colors.redAccent,
+      ),
+      body: Column(
+        children: quotes.map((quote) => QuoteCard(quote:quote)).toList(),
+        ),
+    );
+  }
 }
+ 
 
 class QuoteCard extends StatelessWidget {
   
@@ -107,21 +121,3 @@ class QuoteCard extends StatelessWidget {
     );
   }
 }
-
-class _QuoteListState extends State<QuoteList> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[200],
-      appBar: AppBar(
-        title: Text('Awesome Quotes'),
-        centerTitle: true,
-        backgroundColor: Colors.redAccent,
-      ),
-      body: Column(
-        children: widget.quotes.map((quote) => widget.quoteTemplate(quote)).toList(),
-        ),
-    );
-  }
-}
- 
